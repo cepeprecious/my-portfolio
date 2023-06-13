@@ -33,6 +33,10 @@ h6 {
   font-family: "Raleway", sans-serif;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 /*--------------------------------------------------------------
 # Back to top button
 --------------------------------------------------------------*/
@@ -64,6 +68,53 @@ h6 {
 .back-to-top.active {
   visibility: visible;
   opacity: 1;
+}
+
+/* button effect from uiverse */
+.btn-effect {
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: 3px solid #173b6c;
+  border-radius: 2px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+  color: #173b6c;
+  text-decoration: none;
+  transition: 0.3s ease all;
+  z-index: 1;
+}
+
+.btn-effect:before {
+  transition: 0.5s all ease;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  right: 50%;
+  bottom: 0;
+  opacity: 0;
+  content: '';
+  background-color: #173b6c;
+  z-index: -1;
+}
+
+.btn-effect:hover, .btn-effect:focus {
+  color: white;
+}
+
+.btn-effect:hover:before, .btn-effect:focus:before {
+  transition: 0.5s all ease;
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+
+.btn-effect:active {
+  transform: scale(0.9);
 }
 
 /*--------------------------------------------------------------
@@ -136,9 +187,9 @@ h6 {
 # Navigation Menu
 --------------------------------------------------------------*/
 /* Desktop Navigation */
-.nav-menu {
+/* .nav-menu {
   padding: 30px 0 0 0;
-}
+} */
 
 .nav-menu * {
   margin: 0;
@@ -220,14 +271,13 @@ h6 {
 #hero {
   width: 100%;
   height: 100vh;
-  background: url("../img/hero-bg.jpg") top right;
-  background-size: cover;
+  background: #407fd1;
   position: relative;
 }
 
 #hero:before {
   content: "";
-  background: rgba(0, 0, 0, 0.65);
+  background: rgba(139, 114, 114, 0.664);
   position: absolute;
   bottom: 0;
   top: 0;
@@ -453,16 +503,16 @@ section {
 }
 
 /*--------------------------------------------------------------
-# Akills
+# Skills
 --------------------------------------------------------------*/
-.skills .progress {
+.skills-content .progress {
   height: 60px;
   display: block;
   background: none;
   border-radius: 0;
 }
 
-.skills .progress .skill {
+.skills-content .progress .skill {
   padding: 0;
   margin: 0 0 6px 0;
   text-transform: uppercase;
@@ -472,17 +522,17 @@ section {
   color: #050d18;
 }
 
-.skills .progress .skill .val {
+.skills-content .progress .skill .val {
   float: right;
   font-style: normal;
 }
 
-.skills .progress-bar-wrap {
+.skills-content .progress-bar-wrap {
   background: #dce8f8;
   height: 10px;
 }
 
-.skills .progress-bar {
+.skills-content .progress-bar {
   width: 1px;
   height: 10px;
   transition: 0.9s;
@@ -559,30 +609,29 @@ section {
 
 .portfolio #portfolio-flters {
   padding: 0;
-  margin: 0 auto 35px auto;
+  margin: 0 auto 20px auto;
   list-style: none;
   text-align: center;
-  background: #fff;
-  border-radius: 50px;
-  padding: 2px 15px;
 }
 
 .portfolio #portfolio-flters li {
   cursor: pointer;
   display: inline-block;
-  padding: 10px 15px 8px 15px;
-  font-size: 14px;
-  font-weight: 600;
+  padding: 8px 16px 10px 16px;
+  font-size: 13px;
+  font-weight: 500;
   line-height: 1;
   text-transform: uppercase;
-  color: #272829;
+  color: #444444;
   margin-bottom: 5px;
   transition: all 0.3s ease-in-out;
+  border-radius: 50px;
 }
 
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-  color: #149ddd;
+  color: #fff;
+  background: #34b7a7;
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -594,11 +643,12 @@ section {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  background: rgba(34, 34, 34, 0.6);
 }
 
 .portfolio .portfolio-wrap::before {
   content: "";
-  background: rgba(255, 255, 255, 0.5);
+  background: rgba(34, 34, 34, 0.6);
   position: absolute;
   left: 0;
   right: 0;
@@ -609,53 +659,75 @@ section {
   opacity: 0;
 }
 
-.portfolio .portfolio-wrap .portfolio-links {
-  opacity: 1;
-  left: 0;
-  right: 0;
-  bottom: -60px;
-  z-index: 3;
-  position: absolute;
+.portfolio .portfolio-wrap img {
   transition: all ease-in-out 0.3s;
-  display: flex;
-  justify-content: center;
 }
 
-.portfolio .portfolio-wrap .portfolio-links a {
-  color: #fff;
-  font-size: 28px;
-  text-align: center;
-  background: rgba(20, 157, 221, 0.75);
-  transition: 0.3s;
-  width: 50%;
-}
-
-.portfolio .portfolio-wrap .portfolio-links a:hover {
-  background: rgba(20, 157, 221, 0.95);
-}
-
-.portfolio .portfolio-wrap .portfolio-links a+a {
-  border-left: 1px solid #37b3ed;
-}
-
-.portfolio .portfolio-wrap:hover::before {
+.portfolio .portfolio-wrap .portfolio-info {
+  opacity: 0;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 3;
+  transition: all ease-in-out 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 20px;
+}
+
+.portfolio .portfolio-wrap .portfolio-info h4 {
+  font-size: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+.portfolio .portfolio-wrap .portfolio-info p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+  text-transform: uppercase;
+  padding: 0;
+  margin: 0;
+  font-style: italic;
+}
+
+.portfolio .portfolio-wrap .portfolio-links {
+  text-align: center;
+  z-index: 4;
+}
+
+.portfolio .portfolio-wrap .portfolio-links a {
+  color: #fff;
+  margin: 0 5px 0 0;
+  font-size: 28px;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.portfolio .portfolio-wrap .portfolio-links a:hover {
+  color: #78d9cd;
+}
+
+.portfolio .portfolio-wrap:hover::before {
   opacity: 1;
 }
 
-.portfolio .portfolio-wrap:hover .portfolio-links {
+.portfolio .portfolio-wrap:hover img {
+  transform: scale(1.2);
+}
+
+.portfolio .portfolio-wrap:hover .portfolio-info {
   opacity: 1;
-  bottom: 0;
 }
 
 /*--------------------------------------------------------------
 # Portfolio Details
 --------------------------------------------------------------*/
 .portfolio-details {
-  padding-top: 40px;
+  padding-top: 0;
 }
 
 .portfolio-details .portfolio-details-slider img {
@@ -672,16 +744,16 @@ section {
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #149ddd;
+  border: 1px solid #34b7a7;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #149ddd;
+  background-color: #34b7a7;
 }
 
 .portfolio-details .portfolio-info {
   padding: 30px;
-  box-shadow: 0px 0 30px rgba(5, 13, 24, 0.08);
+  box-shadow: 0px 0 30px rgba(34, 34, 34, 0.08);
 }
 
 .portfolio-details .portfolio-info h3 {
@@ -719,11 +791,11 @@ section {
 /*--------------------------------------------------------------
 # Services
 --------------------------------------------------------------*/
-.services .icon-box {
+.project-system .icon-box {
   margin-bottom: 20px;
 }
 
-.services .icon {
+.project-system .icon {
   float: left;
   display: flex;
   align-items: center;
@@ -736,36 +808,36 @@ section {
   border: 1px solid #149ddd;
 }
 
-.services .icon i {
+.project-system .icon i {
   color: #fff;
   font-size: 24px;
   line-height: 0;
 }
 
-.services .icon-box:hover .icon {
+.project-system .icon-box:hover .icon {
   background: #fff;
 }
 
-.services .icon-box:hover .icon i {
+.project-system .icon-box:hover .icon i {
   color: #149ddd;
 }
 
-.services .title {
+.project-system .title {
   margin-left: 80px;
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
-.services .title a {
+.project-system .title a {
   color: #343a40;
 }
 
-.services .title a:hover {
+.project-system .title a:hover {
   color: #149ddd;
 }
 
-.services .description {
+.project-system .description {
   margin-left: 80px;
   line-height: 24px;
   font-size: 14px;

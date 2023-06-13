@@ -196,6 +196,14 @@
     selector: '.portfolio-lightbox'
   });
 
+  const galleryLightbox = GLightbox({
+    selector: '.gallery-lightbox'
+  });
+
+  const projectLightbox = GLightbox({
+    selector: '.project-lightbox'
+  });
+
   /**
    * Portfolio details slider
    */
